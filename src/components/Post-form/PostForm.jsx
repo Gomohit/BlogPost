@@ -17,7 +17,6 @@ function PostForm({post}) {
     },})
     const userData=useSelector((state)=>state.auth.userData)
     const submit =async (data)=>{
-        // console.log(data,2)
         if(post){
             // console.log("post is available")
             const file=data.image[0]?databaseservice.uploadFile(data.image[0]):null
@@ -36,15 +35,14 @@ function PostForm({post}) {
             // console.log('data in else')
             const file=await databaseservice.uploadFile(data.image[0])
             if(file){
-                // console.log(file.$id)
+                // console.log(userData.$id)
                 const fileId=file.$id
                 data.featuredImage=fileId   
-                const dbPost=await databaseservice.createPost({
-                    ...data,userId:userData.$id
-                })
+                const dbPost=await databaseservice.createPost({...data,userId:userData.$id})
+                console.log(dbPost)
                 if(dbPost){
-                    // navigate(`/post/${dbPost.$id}`)
-                    navigate('/')
+                    navigate(`/post/${dbPost.$id}`)
+                    // navigate('/')
                 }
             }
         }
@@ -63,7 +61,7 @@ function PostForm({post}) {
     useEffect(()=>{
         const subscription=watch((value,{name})=>{
             if(name==='title'){
-                setValue('slug',slugTransform(value.title,{shouldValidate:true}))
+                setValue('slug',slugTransform(value.title),{shouldValidate:true})
             }
         })
     },[watch,slugTransform,setValue])

@@ -13,12 +13,16 @@ function LogOut() {
     const {register,handleSubmit}=useForm()
     const create=async(data)=>{
         setError("")
+        if (data.password !== data.repeatPassword) {
+            setError('Passwords does not match');
+            return;
+        }    
         try {
-            const userData=await authservice.createAccount(data)
-            if(userData){
-              const user=await authservice.getCurrentUser()
-              if(user)dispatch(login(userData))
-              navigate('/')
+                const userData=await authservice.createAccount(data)
+                if(userData){
+                const user=await authservice.getCurrentUser()
+                if(user)dispatch(login(userData))
+                navigate('/')
             }    
         } 
         catch (error) { 
@@ -72,6 +76,12 @@ function LogOut() {
                         placeholder="Enter your password"
                         {...register("password", {
                             required: true,})}
+                        />
+                        <Input
+                            label="Repeat Password: "
+                            type="password"
+                            placeholder="Repeat your password"
+                            {...register('repeatPassword',{required:true})}
                         />
                         <Button type="submit" className="w-full">
                             Create Account

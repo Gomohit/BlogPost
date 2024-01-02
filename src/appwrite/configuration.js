@@ -15,7 +15,7 @@ export class databaseService{
 
     async createPost({title,slug,content,featuredImage,status,userId}){
         try {
-            const post=await this.database.createDocument(config.appwriteDatabaseId,config.appwriteCollectionId,ID.unique(),{
+            const post=await this.database.createDocument(config.appwriteDatabaseId,config.appwriteCollectionId,slug,{
                 title,content,featuredImage,status,userId})
             // console.log(post);    
             return post 
@@ -25,16 +25,15 @@ export class databaseService{
         }
     }
 
-    async updatePost(id,{title,slug,content,featuredImage,status}){
+    async updatePost(slug,{title,content,featuredImage,status}){
         try{
-            await this.database.updateDocument(config.appwriteDatabaseId,config.appwriteCollectionId,id,{
+            return await this.database.updateDocument(config.appwriteDatabaseId,config.appwriteCollectionId,slug,{
                 title,
-                slug,
                 content,
                 featuredImage,
                 status,
             })
-            return true
+            // return true
         }
         catch(error){
             throw error

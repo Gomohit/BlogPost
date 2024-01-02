@@ -10,12 +10,20 @@ function Home() {
     const status=useSelector((state)=>state.auth.status)
     // console.log(status)
     const [posts,setPosts]=useState([])
+
     useEffect(()=>{
-        databaseservice.getPosts([]).then((posts)=>{
-            if(posts){
-                setPosts(posts.documents)
+        const fetchPosts = async () => {
+            try {
+              const fetchedPosts = await databaseservice.getPosts([]);
+              if (fetchedPosts) {
+                setPosts(fetchedPosts.documents);
+              }
+            } catch (error) {
+                throw error
             }
-        })
+          };
+      
+        fetchPosts();
     },[])
     if(posts.length==0){
         return (
@@ -59,23 +67,26 @@ function Home() {
                             </div>
                         </div>
                     </Container>
-                </div>
+    </div>
         )
     }
-    return(
-        <div className='w-full py-8'>
-            <Container>
-                <h2 className='w-full text-xl font-serif text-left mb-5'>If you want to edit or delete the post click on post</h2>
-                <div className='flex flex-wrap'>
-                    {posts && posts.map((post)=>(
-                        <div key={post.$id} className="w-1/4 p-2">
-                            <PostCard post={post}/>
-                        </div>
-                    ))}
-                </div>
-            </Container>
-        </div>
-    )
+    else{
+        // {console.log(posts.length)}
+        return(
+            <div className='w-full py-8'>
+                <Container>
+                    <h2 className='w-full text-xl font-serif text-left mb-5'>If you want to edit or delete the post click on post</h2>
+                    <div className='flex flex-wrap'>
+                        {posts && posts.map((post)=>(
+                            <div key={post.$id} className="w-1/4 p-2">
+                                <PostCard post={post}/>
+                            </div>
+                        ))}
+                    </div>
+                </Container>
+            </div>
+        )
+    }    
 }
 
 export default Home
