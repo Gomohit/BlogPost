@@ -16,8 +16,7 @@ export class databaseService{
     async createPost({title,slug,content,featuredImage,status,userId}){
         try {
             const post=await this.database.createDocument(config.appwriteDatabaseId,config.appwriteCollectionId,slug,{
-                title,content,featuredImage,status,userId})
-            // console.log(post);    
+                title,content,featuredImage,status,userId})  
             return post 
         } 
         catch (error) {
@@ -33,7 +32,6 @@ export class databaseService{
                 featuredImage,
                 status,
             })
-            // return true
         }
         catch(error){
             throw error

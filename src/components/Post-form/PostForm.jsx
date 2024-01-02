@@ -6,8 +6,6 @@ import { useSelector } from 'react-redux'
 import {Link,useNavigate} from 'react-router-dom'
 
 function PostForm({post}) {
-    // console.log(name)
-    // console.log(post)
     const navigate=useNavigate()
     const {register,handleSubmit,watch,setValue,control,getValues}=useForm({defaultValues:{
         title:post?.title ||'', 
@@ -18,9 +16,7 @@ function PostForm({post}) {
     const userData=useSelector((state)=>state.auth.userData)
     const submit =async (data)=>{
         if(post){
-            // console.log("post is available")
             const file=data.image[0]?databaseservice.uploadFile(data.image[0]):null
-            // console.log(file)
             if(file){
                 databaseservice.deleteFile(post.featuredImage)
             }
@@ -28,33 +24,27 @@ function PostForm({post}) {
             featuredImage:file?file.$id:undefined})
             if(dbPost){
                 navigate(`/post/${dbPost.$id}`)
-            }
-               
+            }    
         }
         else{
-            // console.log('data in else')
             const file=await databaseservice.uploadFile(data.image[0])
             if(file){
-                // console.log(userData.$id)
                 const fileId=file.$id
                 data.featuredImage=fileId   
                 const dbPost=await databaseservice.createPost({...data,userId:userData.$id})
                 console.log(dbPost)
                 if(dbPost){
                     navigate(`/post/${dbPost.$id}`)
-                    // navigate('/')
                 }
             }
         }
     } 
     const slugTransform=useCallback((value)=>{
         if(value && typeof value ==='string'){ 
-            // console.log(value)
             return value
             .trim()
             .toLowerCase()
             .replace(/[^a-zA-Z\d]+/g, "-")
-            // .replace(/\s/g, "-");
         }
         return ''
     },[])
@@ -95,7 +85,6 @@ function PostForm({post}) {
                 />
                 {post && (
                     <div className="w-full mb-4">
-                        {/* {console.log(post)} */}
                         <img
                             src={databaseservice.getFilePreview(post.featuredImage)}
                             alt={post.title}

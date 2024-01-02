@@ -25,11 +25,8 @@ function App() {
   return !loading ?(
     <div className='flex flex-col justify-normal bg-white mb-0'>
       <div className="w-full">
-
         <Header/>
-        {/* <main> */}
           <Outlet/>
-        {/* </main> */}
         <Footer/>
       </div>
    </div>

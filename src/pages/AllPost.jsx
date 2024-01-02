@@ -5,7 +5,6 @@ function AllPost() {
     const [posts,setposts]=useState([])
     useEffect(()=>{
         databaseservice.getPosts([]).then((posts)=>{
-            // console.log(posts)
             if(posts){
                 setposts(posts.documents)
             }
@@ -17,7 +16,6 @@ function AllPost() {
         <div className='flex flex-wrap mt-12 mb-52'>
         {posts && posts.map((post)=>(
             <div key={post.$id} className='p-2 w-1/4'>
-                {/* {console.log(post)} */}
                 <PostCard post={post}/>
             </div>
         ))}

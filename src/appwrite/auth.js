@@ -1,6 +1,5 @@
 import config from "../config/config.js";
 import { Client, Account, ID } from "appwrite";
-// console.log(config.appwriteurl);
 export class AuthService{
     client=new Client();
     account;
@@ -34,7 +33,6 @@ export class AuthService{
         } catch (error) {
             throw error
         }
-        return null
     }
     async logOut(){
         try{

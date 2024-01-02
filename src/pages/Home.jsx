@@ -8,7 +8,6 @@ import { useNavigate,Link } from 'react-router-dom'
 function Home() {
     const navigate=useNavigate()
     const status=useSelector((state)=>state.auth.status)
-    // console.log(status)
     const [posts,setPosts]=useState([])
 
     useEffect(()=>{
@@ -71,7 +70,6 @@ function Home() {
         )
     }
     else{
-        // {console.log(posts.length)}
         return(
             <div className='w-full py-8'>
                 <Container>
