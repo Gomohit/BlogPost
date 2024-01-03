@@ -8,7 +8,7 @@ import {Link,useNavigate} from 'react-router-dom'
 function PostForm({post}) {
     const navigate=useNavigate()
     const {register,handleSubmit,watch,setValue,control,getValues}=useForm({defaultValues:{
-        title:post?.title ||'', 
+        title:'', 
         slug:post?.slug ||'',
         content:post?.content ||'',
         status:post?.status || 'active'
@@ -32,7 +32,7 @@ function PostForm({post}) {
                 const fileId=file.$id
                 data.featuredImage=fileId   
                 const dbPost=await databaseservice.createPost({...data,userId:userData.$id})
-                console.log(dbPost)
+                // console.log(dbPost)
                 if(dbPost){
                     navigate(`/post/${dbPost.$id}`)
                 }

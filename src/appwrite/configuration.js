@@ -58,9 +58,9 @@ export class databaseService{
         try {
             return await this.database.listDocuments(config.appwriteDatabaseId,config.appwriteCollectionId,queries)
         } catch (error) {
-            
+            return false
         }
-    }
+    }       
 
     async uploadFile(file){
         try {
