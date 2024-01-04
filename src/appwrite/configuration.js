@@ -56,7 +56,9 @@ export class databaseService{
 
     async getPosts(queries=[Query.equal("status","true")]){
         try {
-            return await this.database.listDocuments(config.appwriteDatabaseId,config.appwriteCollectionId,queries)
+            // let queries=[Query.equal("status","true")]
+            const result=await this.database.listDocuments(config.appwriteDatabaseId,config.appwriteCollectionId,queries)
+            return result
         } catch (error) {
             return false
         }

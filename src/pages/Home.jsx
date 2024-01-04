@@ -8,7 +8,7 @@ import { useNavigate,Link } from 'react-router-dom'
 function Home() {
     const navigate=useNavigate()
     const status=useSelector((state)=>state.auth.status)
-    // console.log(status)
+    const userdata=useSelector((state)=>state.auth.userData)
     const [posts,setPosts]=useState([])
     const [loading,setLoading]=useState(false)
 
@@ -84,9 +84,9 @@ function Home() {
         )
     }
     return(
-            <div className='w-full py-8'>
+            <div className='w-full py-8 my-10'>
                 <Container>
-                    <h2 className='w-full text-xl font-serif text-left mb-5'>If you want to edit or delete the post click on post</h2>
+                    <h2 className='w-full text-xl font-sans text-left mb-5'>If you want to edit or delete the post click on post</h2>
                     <div className='flex flex-wrap'>
                         {posts && posts.map((post)=>(
                             <div key={post.$id} className="w-1/4 p-2">

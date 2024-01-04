@@ -17,7 +17,7 @@ function LogOut() {
             setError('Passwords does not match');
             return;
         }    
-        try {
+        try {   
                 const userData=await authservice.createAccount(data)
                 if(userData){
                 const user=await authservice.getCurrentUser()
