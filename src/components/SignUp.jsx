@@ -31,18 +31,18 @@ function LogOut() {
     }
   return (
     <div className="flex items-center justify-center lg:mb-20">
-            <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10 flex flex-col items-center `}>
+            <div className="mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10 flex flex-col items-center dark:bg-gray-800 dark:border-gray-900">
             <div className="mb-2 ">
                     <span className="inline-block w-full">
                         <Logo width="100%" textcolor='text-blue-400'/>
                     </span>
                 </div>
-                <h2 className="text-center text-2xl font-bold leading-tight">Sign up to create account</h2>
-                <p className="mt-2 text-center text-base text-black/60">
+                <h2 className="text-center text-2xl font-bold leading-tight dark:text-gray-200">Sign up to create account</h2>
+                <p className="mt-2 text-center text-base text-black/60 dark:text-gray-200">
                     Already have an account?&nbsp;
                     <Link
                         to="/login"
-                        className="font-medium text-primary transition-all duration-200 hover:underline"
+                        className="font-medium text-primary transition-all duration-200 hover:underline dark:text-blue-500"
                     >
                         Sign In
                     </Link>

@@ -1,4 +1,4 @@
-import React,{useCallback, useEffect} from 'react'
+import React,{useCallback, useEffect,useState} from 'react'
 import {useForm} from "react-hook-form"
 import {Input,Button,Logo,RTE,Select} from "../index"
 import databaseservice from '../../appwrite/configuration'
@@ -32,13 +32,13 @@ function PostForm({post}) {
                 const fileId=file.$id
                 data.featuredImage=fileId   
                 const dbPost=await databaseservice.createPost({...data,userId:userData.$id})
-                // console.log(dbPost)
                 if(dbPost){
                     navigate(`/post/${dbPost.$id}`)
                 }
             }
         }
     } 
+
     const slugTransform=useCallback((value)=>{
         if(value && typeof value ==='string'){ 
             return value
@@ -55,31 +55,33 @@ function PostForm({post}) {
             }
         })
     },[watch,slugTransform,setValue])
+
   return (
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap my-10">
             <div className="w-2/3 px-2">
                 <Input
                     label="Title :"
                     placeholder="Title"
-                    className="mb-4"
+                    className="mb-4 dark:bg-gray-400 dark:placeholder-gray-800 dark:label-white"
                     {...register("title", { required: true })}
                 />
                 <Input
                     label="Slug :"
                     placeholder="Slug"
-                    className="mb-4"
+                    
+                    className="mb-4 dark:bg-gray-400 dark:placeholder-gray-800"
                     {...register("slug", { required: true })}
                     onInput={(e) => {
                         setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                     }}
                 />
-                <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
+                <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")}  />
             </div>
             <div className="w-1/3 px-2">
                 <Input
                     label="Featured Image :"
                     type="file"
-                    className="mb-4"
+                    className="mb-4 dark:bg-gray-400 dark:placeholder-gray-800"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
                     {...register("image", { required: !post })}
                 />
@@ -95,14 +97,14 @@ function PostForm({post}) {
                 <Select
                     options={["active", "inactive"]}
                     label="Status"
-                    className="mb-4"
+                    className="mb-4 dark:bg-gray-400 dark:placeholder-gray-800"
                     {...register("status", { required: true })}
                 />
                 <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
                     {post ? "Update" : "Submit"}
                 </Button>
             </div>
-        </form>
+    </form>
   )
 }
 export default PostForm 

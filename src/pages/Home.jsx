@@ -6,12 +6,10 @@ import { useSelector } from 'react-redux'
 import { useNavigate,Link } from 'react-router-dom'
 
 function Home() {
-    const navigate=useNavigate()
     const status=useSelector((state)=>state.auth.status)
     const userdata=useSelector((state)=>state.auth.userData)
     const [posts,setPosts]=useState([])
     const [loading,setLoading]=useState(false)
-
     useEffect(()=>{
         const fetchPosts = async () => {
             try {
@@ -32,28 +30,29 @@ function Home() {
     if(loading){
         return (
             <div className="flex flex-col items-center justify-center spinner-container my-52">
-                <div className="border-t-2 border-blue-500 border-solid h-10 w-10 rounded-full animate-spin"></div>
-                <p className='text-center font-sans font-normal text-base mt-1'>loading...</p>
+                <div className="border-t-2 border-blue-500  border-solid h-10 w-10 rounded-full animate-spin"></div>
+                <p className='text-center font-sans font-normal text-base mt-1 dark:text-gray-300'>loading...</p>
             </div>
         )
     }
     if(posts.length==0 || status==false){
         return (
-                <div className="w-full py-8  text-center">
+                <div className="w-full py-8 text-center bg-white dark:bg-gray-700 ">
                     <Container>
                         <div className="flex flex-wrap">
                             <div className="p-2 w-full mt-10 items-center flex justify-center">
                     
-                                {status?(<div className='w-[400px] shadow-lg  border border-gray-100 p-5 flex flex-col items-center align-middle justify-center'>
-                                    <h1 className='w-full font-medium text-2xl mb-4'>You don&apos;t have post to see</h1>
-                                    <h4 className=' mb-5'>Add Post From here
+                                {status?
+                                (<div className='w-[400px] shadow-lg  border border-gray-100 p-5 flex flex-col items-center align-middle justify-center rounded-md dark:bg-gray-800 dark:border-gray-900'>
+                                    <h1 className='w-full font-medium text-2xl mb-4 dark:text-white'>You don&apos;t have post to see</h1>
+                                    <h4 className=' mb-5 dark:text-white'>Add Post From here
                                     </h4>
                                     <div className='flex justify-center gap-3'>
                                     <Link to='/add-post' className='bg-blue-400 px-4 py-3 rounded-xl text-white text-lg font-semibold'> Add Post </Link>
                                     </div>
-                                    </div>):(<div className='w-[400px] shadow-lg  border border-gray-100 p-5 flex flex-col items-center align-middle justify-center'>
-                                    <h1 className='w-full font-bold text-2xl mb-4'>To Create an Account</h1>
-                                    <h4 className=' mb-5'>Already have an Account?
+                                    </div>):(<div className='w-[400px] shadow-lg  border border-gray-100 p-5 flex flex-col items-center align-middle justify-center rounded-md dark:bg-gray-800 dark:border-gray-900'>
+                                    <h1 className='w-full font-bold text-2xl mb-4 dark:text-white'>To Create an Account</h1>
+                                    <h4 className=' mb-5 dark:text-white'>Already have an Account?
                                     <Link to='/login' className=' text-blue-400 text-lg '>&nbsp; Login</Link>
                                     </h4>
                                     <div className='flex justify-center gap-3'>
@@ -61,12 +60,11 @@ function Home() {
                                     </div>
                                     </div>)}
                             </div>
-
                             <div className=' w-full flex flex-col mt-12 mb-4'>
-                                <div className='text-2xl font-bold text-left py-10'>
+                                <div className='text-2xl font-bold text-left py-10 dark:text-gray-300'>
                                     Follow Instruction:
                                 </div>
-                                <ul className='flex flex-col justify-start'>
+                                <ul className='flex flex-col justify-start dark:text-gray-300'>
                                     <li className='w-full text-xl text-left pb-4 font-sans'>
                                        1. You need to Login to see the post if you have any account login using your credentials such as (email,password).
                                     </li>
@@ -84,9 +82,9 @@ function Home() {
         )
     }
     return(
-            <div className='w-full py-8 my-10'>
-                <Container>
-                    <h2 className='w-full text-xl font-sans text-left mb-5'>If you want to edit or delete the post click on post</h2>
+            <div className='w-full py-8 my-10 bg-white dark:bg-gray-700 '>
+                <Container bg={"bg-gray-700"}>
+                    <h2 className='w-full text-xl font-sans text-left mb-5 dark:text-white'>If you want to edit or delete the post click on post</h2>
                     <div className='flex flex-wrap'>
                         {posts && posts.map((post)=>(
                             <div key={post.$id} className="w-1/4 p-2">
@@ -98,6 +96,5 @@ function Home() {
             </div>
         )
     }    
-
 
 export default Home

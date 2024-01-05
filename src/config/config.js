@@ -4,6 +4,6 @@ const config={
     appwriteDatabaseId:String(import.meta.env.VITE_DATABASE_ID),
     appwriteBucketId:String(import.meta.env.VITE_BUCKET_ID),
     appwriteCollectionId:String(import.meta.env.VITE_COLLECTION_ID),
-}
+} 
 
 export default config
