@@ -93,7 +93,6 @@ function Home() {
                             </div>
                         ))}
                     </div>
-                    <Select label="Age" options={options}/>
                 </Container>
             </div>
         )
