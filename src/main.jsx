@@ -13,6 +13,7 @@ import EditPost from './pages/EditPost.jsx'
 import AddPost from './pages/AddPost.jsx'
 import AllPost from './pages/AllPost.jsx'
 import Post from './pages/Post.jsx'
+import NotFound from './pages/NotFound.jsx'
 
 const router=createBrowserRouter([
   {
@@ -67,8 +68,14 @@ const router=createBrowserRouter([
         path: "/post/:slug",
         element: <Post />,
     },
+    
     ]
+  },
+  {
+    path:"*",
+    element:<NotFound/>
   }
+
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

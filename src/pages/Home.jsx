@@ -5,6 +5,7 @@ import { Container,PostCard } from '../components'
 import { useSelector } from 'react-redux'
 import { useNavigate,Link } from 'react-router-dom'
 
+
 function Home() {
     const status=useSelector((state)=>state.auth.status)
     const userdata=useSelector((state)=>state.auth.userData)
@@ -27,6 +28,7 @@ function Home() {
           };
         fetchPosts();   
     },[])
+    
     if(loading){
         return (
             <div className="flex flex-col items-center justify-center spinner-container my-52">
@@ -41,7 +43,6 @@ function Home() {
                     <Container>
                         <div className="flex flex-wrap">
                             <div className="p-2 w-full mt-10 items-center flex justify-center">
-                    
                                 {status?
                                 (<div className='w-[400px] shadow-lg  border border-gray-100 p-5 flex flex-col items-center align-middle justify-center rounded-md dark:bg-gray-800 dark:border-gray-900'>
                                     <h1 className='w-full font-medium text-2xl mb-4 dark:text-white'>You don&apos;t have post to see</h1>
@@ -92,6 +93,7 @@ function Home() {
                             </div>
                         ))}
                     </div>
+                    <Select label="Age" options={options}/>
                 </Container>
             </div>
         )
